@@ -1,0 +1,91 @@
+<nav class="navbar navbar-expand-md navbar-dark sticky-top">
+    <div class="container">
+        <a class="navbar-brand" href="{% url 'home' %}">
+            <strong>CONSUL-X</strong>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            {% if user.is_authenticated %}
+                <ul class="navbar-nav mr-auto text-center">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'visitante:listar_visitante' %}">Visitas<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'areaComun:listar_areaComun' %}">Areas Sociales</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'reserva:listar_reserva' %}">Reservas</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active"
+                           href="#" id="navbarDropdown" role="button"
+                           data-toggle="dropdown" aria-haspopup="true"
+                           aria-expanded="false">Interno</a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{% url 'propietario:listar_propietario' %}">Propietarios</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{% url 'usuario:listar_usuario' %}">Usuarios</a>
+                        </div>
+                    </li>
+                </ul>
+
+                {% else %}
+                    <ul class="navbar-nav mr-auto text-center">
+                    </ul>
+            {% endif %}
+
+            <ul class="navbar-nav mr-0 text-center">
+                <li class="nav-item dropdown">
+                    {% if user.is_authenticated %}
+
+                        <a class="nav-link dropdown-toggle active" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                            Usuario: {{ user.get_username }}
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item text-danger" href="{% url 'logout'%}?next={{request.path}}">
+                                <span class="icon-usuario d-flex justify-content-center align-items-center">  Cerrar Sesion</span>
+                            </a>
+                        </div>
+{#                        <li>Usuario: {{ user.get_username }}</li>#}
+{#                        <li><a href="{% url 'logout'%}?next={{request.path}}">Cerrar Sesion</a></li>#}
+
+                    {% else %}
+
+                        <a class="nav-link dropdown-toggle active" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                        <span class="icon-usuario"></span>
+                        </a>
+
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item text-success text-center"
+                               href="{% url 'login'%}?next={{request.path}}">Iniciar Sesion</a>
+                        </div>
+
+                    {% endif %}
+
+{#                    <a class="nav-link dropdown-toggle active" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">#}
+{#                        <span class="icon-usuario"></span>#}
+{#                    </a>#}
+{#                        <div class="dropdown-menu">#}
+{##}
+{#                            <a class="dropdown-item" href="#">Action</a>#}
+{#                            <a class="dropdown-item" href="#">Another action</a>#}
+{#                            <a class="dropdown-item" href="#">Something else here</a>#}
+{#                            <div class="dropdown-divider"></div>#}
+{#                            <a class="dropdown-item" href="#">Separated link</a>#}
+{#                        </div>#}
+                </li>
+            </ul>
+{#            <a href="" class="usuario-header"><span class="icon-usuario"></span></a>#}
+    {#      <form class="form-inline my-2 my-lg-0">#}
+    {#        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">#}
+    {#        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>#}
+    {#      </form>#}
+        </div>
+    </div>
+</nav>

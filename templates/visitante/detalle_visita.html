@@ -1,0 +1,87 @@
+{% extends 'base/base.html' %}
+{% block title %}
+    DETALLE DE VISITA
+{% endblock %}
+
+{% block style %}
+    {% load staticfiles %}
+{#    <link rel="stylesheet" href="../../static/css/formularios-style.css">#}
+    <link rel="stylesheet" href="{% static 'css/formularios-style.css' %}">
+{% endblock %}
+
+{% block javascript %}
+    <script src="{% static 'js/validar-visita.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+    <div class="container contenido-form">
+
+        <div class="row d-flex justify-content-center mt-4 mb-5 animated bounceInLeft" id="formulario">
+            <div class="col-12 col-sm-11 col-md-9 col-lg-7 col-xl-6">
+                <fieldset>
+                    <legend>Informacion</legend>
+                        <h2 class="mb-4">Detalle de Visita</h2>
+                        <form>
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-md-4 col-form-label pl-0"
+                                       for=""><strong>CI :</strong></label>
+                                <p class="col-sm-12 col-md-6 col-form-label pl-0">{{ visitante.ci }}</p>
+{#                                       data-toggle="tooltip" data-placement="right"#}
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-md-4 col-form-label pl-0"
+                                       for=""><strong>Nombres :</strong></label>
+                                <p class="col-sm-12 col-md-6 col-form-label pl-0">{{ visitante.nombre }}</p>
+{#                                       data-toggle="tooltip" data-placement="right"#}
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-md-4 col-form-label pl-0"
+                                       for=""><strong>Apellidos :</strong></label>
+                                <p class="col-sm-12 col-md-6 col-form-label pl-0">{{ visitante.app }}  {{ visitante.apm }}</p>
+{#                                       data-toggle="tooltip" data-placement="right"#}
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-md-4 col-form-label pl-0"
+                                       for=""><strong>Visito a :</strong></label>
+                                <p class="col-sm-12 col-md-6 col-form-label pl-0">{{ visitante.id_propietario.nombre }}
+                                    {{ visitante.id_propietario.app }} {{ visitante.id_propietario.apm }}</p>
+{#                                       data-toggle="tooltip" data-placement="right"#}
+                            </div>
+
+
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-md-4 col-form-label pl-0"
+                                       for=""><strong>Ingreso en/a :</strong></label>
+                                <p class="col-sm-12 col-md-6 col-form-label pl-0">{{ visitante.mod_ing.title }}</p>
+{#                                       data-toggle="tooltip" data-placement="right"#}
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-md-4 col-form-label pl-0"
+                                       for=""><strong>Fecha Ingreso :</strong></label>
+                                <p class="col-sm-12 col-md-6 col-form-label pl-0">{{ visitante.created_at }}</p>
+{#                                       data-toggle="tooltip" data-placement="right"#}
+                            </div>
+
+                            <div class="row d-flex justify-content-end">
+                                <button onclick="window.history.back();" class="btn btn-danger btn-lg" type="button">Cancelar</button>
+                            </div>
+                        </form>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block extasjs %}
+    <script src="{% static 'js/modal-propietario.js' %}"></script>
+    <script>
+        $(function () {
+          $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+{% endblock %}

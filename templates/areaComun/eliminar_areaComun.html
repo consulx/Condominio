@@ -1,0 +1,57 @@
+{% extends 'base/base.html' %}
+
+{% block title %}
+ELIMINAR AREA COMUN
+{% endblock %}
+
+{% block style %}
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'css/formularios-style.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container contenido-form">
+
+        <div class="row d-flex justify-content-center mt-4 mb-5 animated bounceInLeft" id="formulario">
+            <div class="col-12 col-sm-11 col-md-9 col-lg-7 col-xl-6">
+                <fieldset>
+                    <legend>Eliminar</legend>
+                    <h3>Desea eliminar este Area Comun?</h3>
+
+                        <form method="post">
+                            {% csrf_token %}
+                            <div class="row d-flex justify-content-center">
+                                <img class="img-fluid img-thumbnail w-50 h-25" src="{{ areacomun.imagen.url }}" alt="No se pudo Cargar">
+                            </div>
+
+                             <div class="form-group row">
+                                <label class="col-sm-12 col-md-4 col-form-label pl-0"
+                                       for=""><strong>Categoria</strong></label>
+                                <p class="col-sm-12 col-md-6 col-form-label pl-0">{{ areacomun.get_categoria_display }}</p>
+{#                                       data-toggle="tooltip" data-placement="right"#}
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-md-4 col-form-label pl-0"
+                                       for=""><strong>Nombre</strong></label>
+                                <p class="col-sm-12 col-md-6 col-form-label pl-0">{{ areacomun.nombre }}</p>
+{#                                       data-toggle="tooltip" data-placement="right"#}
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-md-4 col-form-label pl-0"
+                                       for=""><strong>Sector :</strong></label>
+                                <p class="col-sm-12 col-md-6 col-form-label pl-0">{{ areacomun.sector }}</p>
+{#                                       data-toggle="tooltip" data-placement="right"#}
+                            </div>
+
+                            <button class="btn btn-danger" type="submit">Si, Eliminar</button>
+                            <button type="button" onclick="window.history.back();" class="btn btn-primary">Cancelar</button>
+
+                        </form>
+
+                </fieldset>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,89 @@
+{% extends 'base/base.html' %}
+
+{% block title %}
+    {% if propietario %}
+        EDITAR PROPIETARIO
+        {% else %}
+        NUEVO PROPIETARIO
+    {% endif %}
+{% endblock %}
+
+{% block style %}
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'css/formularios-style.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container contenido-form">
+
+        <div class="row d-flex justify-content-center mt-4 mb-5 animated bounceInLeft" id="formulario">
+            <div class="col-12 col-sm-11 col-md-9 col-lg-7 col-xl-6">
+                <fieldset>
+                    <legend>
+                        {% if object %}
+                            Editar
+                        {% else %}
+                            Nuevo
+                        {% endif %}
+                    </legend>
+                        <h2 class="mb-4">
+                            {% if object %}
+                            Edicion de Propietario
+                        {% else %}
+                            Registro de Propietario
+                        {% endif %}
+                        </h2>
+                        <form novalidate method="post" enctype="multipart/form-data" name="formulario_propietario" onsubmit="return validar();">
+                            {% csrf_token %}
+                    {#        {{ form.as_p }}#}
+
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-md-4 col-form-label pl-0"
+                                       for="ci"><strong><span class="text-danger">*</span> CI.</strong></label>
+                                {{ form.ci }}
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-md-4 col-form-label pl-0"
+                                       for="nombre"><strong><span class="text-danger">*</span> Nombre.</strong></label>
+                                {{ form.nombre }}
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-md-4 col-form-label pl-0"
+                                       for="app"><strong><span class="text-danger">*</span> Apellido P.</strong></label>
+                                {{ form.app }}
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-md-4 col-form-label pl-0"
+                                       for=""><strong><span class="text-danger">*</span> Apellido M.</strong></label>
+                                {{ form.apm }}
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-md-4 col-form-label pl-0"
+                                       for="nro_casa"><strong><span class="text-danger">*</span> Nro. Casa.</strong></label>
+                                {{ form.nro_casa }}
+                            </div>
+
+                            <div class="row d-flex justify-content-end">
+                                <button class="btn btn-success btn-lg mr-2" onclick="">
+                                    {% if object %}
+                                        Actualizar
+                                    {% else %}
+                                        Registrar
+                                    {% endif %}
+                                </button>
+                                <button class="btn btn-danger btn-lg" type="button" onclick='window.history.back();'>Cancelar</button>
+                            </div>
+                        </form>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block extasjs %}
+<script src="{% static 'js/validar-propietario.js' %}"></script>
+{% endblock %}

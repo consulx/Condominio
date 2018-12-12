@@ -1,0 +1,46 @@
+{% extends 'base/base.html' %}
+
+{% block title %}
+    INICIO DE SESION
+{% endblock %}
+
+{% block style %}
+    <link rel="stylesheet" href="../../static/css/header.css">
+    <link rel="stylesheet" href="../../static/css/login-style.css">
+{% endblock %}
+
+{% block header %}
+    {% include 'base/header2.html' %}
+{% endblock %}
+
+{% block content %}
+    <div class="container contenido">
+        <div class="caja-login animated zoomInDown">
+            <form method="post">
+                {% csrf_token %}
+                <h2 class="titulo-login">Inicio de Sesion</h2>
+                <div class="form-group container-icon">
+                    <span class="icon-usuario"></span>
+                    <input type="text" class="input-login" placeholder="Usuario" maxlength="30" name="username">
+                </div>
+
+                <div class="container-icon">
+                    <span class="icon-candado"></span>
+                    <input type="password" class="input-login" placeholder="Contraseña" maxlength="15" name="password">
+                </div>
+
+{#                <div class="row">#}
+{#                    <div class="col-md-6 col-md-offset">#}
+{#                        <div class="form-group">#}
+{#                            <a href="{% url 'password_reset' %}">Olvide mi Contraseña</a>#}
+{#                            <input class="btn btn-primary" type="submit" value="Ingresar">#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+
+                <span class="recuperar-pass">Olvide mi Contraseña <a href="">Recuperar</a></span>
+                <button type="submit" class="btn btn-success animated infinite pulse">INGRESAR</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

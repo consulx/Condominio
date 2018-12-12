@@ -1,0 +1,75 @@
+{% extends 'base/base.html' %}
+{% block title %}
+DETALLE DE PROPIETARIO
+{% endblock %}
+
+{% block style %}
+    {% load staticfiles %}
+{#    <link rel="stylesheet" href="../../static/css/formularios-style.css">#}
+    <link rel="stylesheet" href="{% static 'css/formularios-style.css' %}">
+{% endblock %}
+
+{% block javascript %}
+    <script src="{% static 'js/validar-visita.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+    <div class="container contenido-form">
+
+        <div class="row d-flex justify-content-center mt-4 mb-5 animated bounceInLeft" id="formulario">
+            <div class="col-12 col-sm-11 col-md-9 col-lg-7 col-xl-6">
+                <fieldset>
+                    <legend>Informacion</legend>
+                        <h2 class="mb-4">Detalle de Propietario</h2>
+                        <form>
+                            <div class="row d-flex justify-content-center">
+                                <img class="img-fluid img-thumbnail w-25 h-25 rounded-circle" src="{% static 'img/usuario.png' %}" alt="No se pudo Cargar">
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-md-4 col-form-label pl-0"
+                                       for=""><strong>CI :</strong></label>
+                                <p class="col-sm-12 col-md-6 col-form-label pl-0">{{ propietario.ci }}</p>
+{#                                       data-toggle="tooltip" data-placement="right"#}
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-md-4 col-form-label pl-0"
+                                       for=""><strong>Nombres :</strong></label>
+                                <p class="col-sm-12 col-md-6 col-form-label pl-0">{{ propietario.nombre }}</p>
+{#                                       data-toggle="tooltip" data-placement="right"#}
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-md-4 col-form-label pl-0"
+                                       for=""><strong>Apellidos :</strong></label>
+                                <p class="col-sm-12 col-md-6 col-form-label pl-0">{{ propietario.app }}  {{ visitante.apm }}</p>
+{#                                       data-toggle="tooltip" data-placement="right"#}
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-md-4 col-form-label pl-0"
+                                       for=""><strong>Nro. Casa :</strong></label>
+                                <p class="col-sm-12 col-md-6 col-form-label pl-0">{{ propietario.nro_casa }}</p>
+{#                                       data-toggle="tooltip" data-placement="right"#}
+                            </div>
+
+                            <div class="row d-flex justify-content-end">
+                                <button onclick="window.history.back();" class="btn btn-danger btn-lg" type="button">Cancelar</button>
+                            </div>
+                        </form>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block extasjs %}
+    <script src="{% static 'js/modal-propietario.js' %}"></script>
+    <script>
+        $(function () {
+          $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+{% endblock %}

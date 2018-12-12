@@ -1,0 +1,76 @@
+{% extends 'base/base.html' %}
+
+{% block title %}
+    LISTA DE USUARIOS
+{% endblock %}
+
+{% block content %}
+    <div class="container mt-3">
+        <h1 class="text-center">Lista de Propietarios</h1>
+        <a href="{% url 'usuario:registrar_usuario' %}" class="btn btn-dark btn-lg mb-2">Nuevo Usuario</a>
+
+    <div class="container">
+        <div class="form-group row">
+            <select name="" id="" class="form-control col-12 col-sm-3 col-md-2 p-0 mr-sm-1 mb-1">
+                <option value="ci">CI</option>
+                <option value="nombre">Nombre</option>
+                <option value="app">Apl. Paterno</option>
+                <option value="apm">Apl. Materno</option>
+            </select>
+
+            <input class="form-control col-12 col-sm-6 col-md-4 mr-sm-1" id="buscar" type="Buscar" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" onclick="inicio()">Buscar</button>
+{#                  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>#}
+        </div>
+    </div>
+
+        <div class="row">
+            <div class="table-responsive col-12">
+                <table class="table table-striped table-bordered table-hover">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th nowrap="true" scope="col">#</th>
+                        <th nowrap="true" scope="col">Nombre</th>
+                        <th nowrap="true" scope="col" class="text-center">Apellido</th>
+                        <th nowrap="true" scope="col" class="text-center">Usuario</th>
+                        <th nowrap="true" scope="col" class="text-center">Email</th>
+                        <th nowrap="true" scope="col" class="text-center">Acciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {% if usuario %}
+                        {% for usuario in usuario %}
+                            <tr>
+                                <td class="mdl-data-table__cell--non-numeric">{{ usuario.id}}</td>
+                                <td>{{ usuario.first_name }}</td>
+                                <td>{{ usuario.last_name }}</td>
+                                <td>{{ usuario.username }}</td>
+                                <td>{{ usuario.email }}</td>
+
+                                <td nowrap="true" class="text-center">
+{#                                    <a href="{% url 'usuario:detalle_propietario' propietario.id %}" class="btn btn-info">Detalle</a>#}
+{#                                    <a href="{% url 'usuario:editar_propietario' propietario.id %}" class="btn btn-warning">Editar</a>#}
+{#                                    <a href="{% url 'usuario:eliminar_propietario' propietario.id %}" class="btn btn-danger"> Eliminar</a>#}
+                                </td>
+                            </tr>
+                    {% endfor %}
+                    {% else %}
+                        <h2>No hay Usuarios Registrados!</h2>
+                    {% endif %}
+                    </tbody>
+                </table>
+
+                <div class="d-flex flex-wrap justify-content-center">
+                    {% if page_obj.has_previous %}
+                        <a href="?page={{ page_obj.previous_page_number }}"
+                           class="btn btn-dark btn-lg mr-1">Anterior</a>
+                    {% endif %}
+                    {% if page_obj.has_next %}
+                        <a href="?page={{ page_obj.next_page_number }}"
+                           class="btn btn-success btn-lg ml-1">Siguiente</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

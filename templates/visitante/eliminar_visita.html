@@ -1,0 +1,55 @@
+{% extends 'base/base.html' %}
+
+{% block title %}
+ELIMINAR VISITA
+{% endblock %}
+
+{% block style %}
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'css/formularios-style.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container contenido-form">
+
+        <div class="row d-flex justify-content-center mt-4 mb-5 animated bounceInLeft" id="formulario">
+            <div class="col-12 col-sm-11 col-md-9 col-lg-7 col-xl-6">
+                <fieldset>
+                    <legend>Eliminar</legend>
+                    <h3>Desea eliminar esta Visita?</h3>
+
+                        <form method="post">
+                            {% csrf_token %}
+
+                             <div class="form-group row">
+                                <label class="col-sm-12 col-md-4 col-form-label pl-0"
+                                       for=""><strong>CI :</strong></label>
+                                <p class="col-sm-12 col-md-6 col-form-label pl-0">{{ visitante.ci }}</p>
+{#                                       data-toggle="tooltip" data-placement="right"#}
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-md-4 col-form-label pl-0"
+                                       for=""><strong>Visitante :</strong></label>
+                                <p class="col-sm-12 col-md-6 col-form-label pl-0">{{ visitante.nombre }} {{ visitante.app }} {{ visitante.apm }}</p>
+{#                                       data-toggle="tooltip" data-placement="right"#}
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-md-4 col-form-label pl-0"
+                                       for=""><strong>Visito a :</strong></label>
+                                <p class="col-sm-12 col-md-6 col-form-label pl-0">{{ visitante.id_propietario.nombre }}
+                                    {{ visitante.id_propietario.app }} {{ visitante.id_propietario.apm }}</p>
+{#                                       data-toggle="tooltip" data-placement="right"#}
+                            </div>
+
+                            <button class="btn btn-danger" type="submit">Si, Eliminar</button>
+                            <button type="button" onclick="window.history.back();" class="btn btn-primary">Cancelar</button>
+
+                        </form>
+
+                </fieldset>
+            </div>
+        </div>
+    </div>
+{% endblock %}

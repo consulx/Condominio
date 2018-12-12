@@ -1,0 +1,217 @@
+{% extends 'base/base.html' %}
+{% block title %}
+    EDITAR AREA COMUN
+{% endblock %}
+
+{% block style %}
+    {% load staticfiles %}
+{#    <link rel="stylesheet" href="../../static/css/formularios-style.css">#}
+    <link rel="stylesheet" href="{% static 'css/formularios-style.css' %}">
+{% endblock %}
+
+{% block javascript %}
+    <script src="{% static 'js/validar-visita.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+    <div class="container contenido-form">
+
+        <div class="row d-flex justify-content-center mt-4 mb-5 animated bounceInLeft" id="formulario">
+            <div class="col-12 col-sm-11 col-md-9 col-lg-7 col-xl-6">
+                <fieldset>
+                    <legend>Editar</legend>
+                        <h2 class="mb-4">Edicion de Area Comun</h2>
+                        <form novalidate method="post" enctype="multipart/form-data" name="formulario_visita" onsubmit="return validar();">
+                            {% csrf_token %}
+
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-md-4 col-form-label pl-0"
+                                       for="">
+                                    <strong>
+                                        <span class="text-danger">*</span> Categoria
+                                    </strong></label>
+                                {{ form.categoria }}
+{#                                       data-toggle="tooltip" data-placement="right"#}
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-md-4 col-form-label pl-0"
+                                       for="">
+                                    <strong><span class="text-danger">*</span> Nombre
+                                    </strong></label>
+                                {{ form.nombre }}
+                                <div class="invalid-feedback">
+                                  Please choose a username.
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-md-4 col-form-label pl-0"
+                                       for="">
+                                    <strong><span class="text-danger">*</span> Sector
+                                    </strong></label>
+                                {{ form.sector }}
+                            </div>
+
+                            <br>
+                            <br>
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-md-4 col-form-label pl-0"
+                                       for=""><strong><span class="text-danger">*
+                                </span> Imagen</strong></label>
+{#                                {{ form.imagen }}#}
+                                <div class="custom-file col-md-4">
+                                    <input onchange="mostrarImagen();" type="file" name="imagen" class="d-none" id="imagen"> {# //idcustomFileLang #}
+                                    <label class="btn btn-dark" for="imagen">Subir Imagen</label>
+                                </div>
+
+                                <div class="col-md-4" id="imagePreview">
+                                    {% if areaComun.imagen %}
+                                        <img src="{% static 'Imagenes/' %}{{ areaComun.imagen }}" alt="">
+                                    {% else %}
+                                        <img src="" alt="">
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-md-4 col-form-label pl-0"
+                                       for=""><strong> Descripcion</strong>
+                                </label>
+                                {{ form.descripcion }}
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-12 col-sm-5 col-form-label pl-0"
+                                       for="">
+                                    <strong><span class="text-danger">*</span> Disponible Desde
+                                    </strong>
+                                </label>
+{#                                {{ form.disp_desde }}#}
+
+{#                                {{ form.disp_desde }}#}
+{#                                {{ form.dip_hasta }}#}
+
+                                <input type="time" class="form-control col-3 mr-1"
+                                       name="disp_desde" placeholder="03:30" {% if areaComun.disp_desde.hour <= 9 %}value="0{{ areaComun.disp_desde.hour }}{% if areaComun.disp_desde.minute <= 9 %}:0{{ areaComun.disp_desde.minute }}:00"> A:{% else %}:{{ areaComun.disp_desde.minute }}:00"> A:{% endif %}{% else %}value="{{ areaComun.disp_desde.hour }}:0{{ areaComun.disp_desde.minute }}:00"> A:{% if areaComun.disp_desde.minute <= 9 %}:0{{ areaComun.disp_desde.minute }}:00"> A:{% else %}:{{ areaComun.disp_desde.minute }}:00"> A:{% endif %}
+                                       {% endif %}
+
+                                <input type="time" class="form-control col-3 ml-1"
+                                       name="dip_hasta" placeholder="03:30" {% if areaComun.dip_hasta.hour <= 9 %}value="0{{ areaComun.dip_hasta.hour }}{% if areaComun.dip_hasta.minute <= 9 %}:0{{ areaComun.dip_hasta.minute }}:00">{% else %}:{{ areaComun.dip_hasta.minute }}:00">{% endif %}{% else %}value="{{ areaComun.dip_hasta.hour }}{% if areaComun.dip_hasta.minute <= 9 %}:0{{ areaComun.dip_hasta.minute }}:00">{% else %}:{{ areaComun.dip_hasta.minute }}:00">{% endif %}
+                                       {% endif %}
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-12 col-sm-5 col-form-label pl-0"
+                                       for="">
+                                    <strong><span class="text-danger">*</span> Tiempo Maximo
+                                    </strong>
+                                </label>
+{#                                {{ form.disp_desde }}#}
+{#                                {{ form.tmp_maximo }}#}
+                                <input type="time" class="form-control col-3 mr-1"
+                                       name="tmp_maximo" placeholder="03:30" {% if areaComun.tmp_maximo.hour <= 9 %}value="0{{ areaComun.tmp_maximo.hour }}{% if areaComun.tmp_maximo.minute <= 9 %}:0{{ areaComun.tmp_maximo.minute }}:00">{% else %}:{{ areaComun.tmp_maximo.minute }}:00">{% endif %}{% else %}value="{{ areaComun.tmp_maximo.hour }}{% if areaComun.tmp_maximo.minute <= 9 %}:0{{ areaComun.tmp_maximo.minute }}:00">{% else %}:{{ areaComun.tmp_maximo.minute }}:00">{% endif %}
+                                       {% endif %}
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-12 col-sm-4 col-form-label pl-0"
+                                       for="">
+                                    <strong><span class="text-danger">*</span> Estado
+                                    </strong>
+                                </label>
+
+                                {% if areaComun.estado == "H" %}
+                                    <div class="form-group contenedor-radio">
+                                        <input class="" id="auto"
+                                               type="radio" name="estado" value="H" checked>
+                                        <label class="label-radio"
+                                               for="auto">Habilitado</label>
+
+                                        <input class="" id="pie"
+                                               type="radio" name="estado" value="D">
+                                        <label class="label-radio"
+                                               for="pie">Deshabilitado</label>
+
+                                        <input class="" id="bici"
+                                               type="radio" name="estado" value="M">
+                                        <label class="label-radio"
+                                               for="bici">Mantenimiento</label>
+                                    </div>
+                                {% endif %}
+
+                                {% if areaComun.estado == "D" %}
+                                    <div class="form-group contenedor-radio">
+                                        <input class="" id="auto"
+                                               type="radio" name="estado" value="H">
+                                        <label class="label-radio"
+                                               for="auto">Habilitado</label>
+
+                                        <input class="" id="pie"
+                                               type="radio" name="estado" value="D" checked>
+                                        <label class="label-radio"
+                                               for="pie">Deshabilitado</label>
+
+                                        <input class="" id="bici"
+                                               type="radio" name="estado" value="M">
+                                        <label class="label-radio"
+                                               for="bici">Mantenimiento</label>
+                                    </div>
+                                {% endif %}
+
+                                {% if areaComun.estado == "M" %}
+                                    <div class="form-group contenedor-radio">
+                                        <input class="" id="auto"
+                                               type="radio" name="estado" value="H">
+                                        <label class="label-radio"
+                                               for="auto">Habilitado</label>
+
+                                        <input class="" id="pie"
+                                               type="radio" name="estado" value="D">
+                                        <label class="label-radio"
+                                               for="pie">Deshabilitado</label>
+
+                                        <input class="" id="bici"
+                                               type="radio" name="estado" value="M" checked>
+                                        <label class="label-radio"
+                                               for="bici">Mantenimiento</label>
+                                    </div>
+                                {% endif %}
+
+                            </div>
+
+                            <div class="row d-flex justify-content-end">
+                                <button class="btn btn-success btn-lg mr-2" onclick="">Actualizar</button>
+                                <button onclick="window.history.back();" class="btn btn-danger btn-lg" type="button">Cancelar</button>
+                            </div>
+                        </form>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block extasjs %}
+    <script src="{% static 'js/modal-propietario.js' %}"></script>
+    <script>
+        $(function () {
+          $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+    <script src="{% static 'js/PreviewImagen.js' %}"></script>
+{% endblock %}
+{##}
+{#{% if areaComun.disp_desde.hour <= 9 %}#}
+{#    value="0{{ areaComun.disp_desde.hour }}#}
+{#    {% if areaComun.disp_desde.minute <= 9 %}#}
+{#        :0{{ areaComun.disp_desde.minute }}"> A:#}
+{#    {% else %}#}
+{#        :{{ areaComun.disp_desde.minute }}"> A:#}
+{#    {% endif %}#}
+{#{% else %}#}
+{#    value="{{ areaComun.disp_desde.hour }}:0{{ areaComun.dip_hasta.minute }}"> A:#}
+{#    {% if areaComun.disp_desde.minute <= 9 %}#}
+{#        :0{{ areaComun.disp_desde.minute }}"> A:#}
+{#    {% else %}#}
+{#        :{{ areaComun.disp_desde.minute }}"> A:#}
+{#    {% endif %}#}
+{#{% endif %}#}

@@ -1,0 +1,210 @@
+{% extends 'base/base.html' %}
+{% block title %}
+    REGISTRO DE RESERVA
+{% endblock %}
+
+{% block style %}
+    {% load staticfiles %}
+{#    <link rel="stylesheet" href="../../static/css/formularios-style.css">#}
+    <link rel="stylesheet" href="{% static 'css/formularios-style.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container contenido-form">
+
+        <div class="row d-flex justify-content-center mt-4 mb-5 animated bounceInLeft" id="formulario">
+            <div class="col-12 col-sm-11 col-md-10 col-lg-9 col-xl-8"> {# col-12 col-sm-11 col-md-9 col-lg-7 col-xl-6 #}
+                <fieldset>
+                    <legend>Nuevo</legend>
+                        <h2 class="mb-4">Registro de Reserva</h2>
+                        <form novalidate method="post" name="formulario_reserva" onsubmit="return validar();">
+                            {% csrf_token %}
+
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-md-4 col-form-label pl-0"
+                                       for=""><strong><span class="text-danger">*</span> Propietario</strong></label>
+                                <input class="form-control col-11 col-md-7"
+                                       id="visitante"
+                                       type="text" readonly disabled
+                                       placeholder="------------------">
+                                <input type="hidden" name="id_propietario" value="" id="pk-visitante">
+                                <a href="#" class="form-control btn btn-dark col-1 icon-search d-flex justify-content-center align-items-center"
+                                   data-toggle="modal" data-target="#modalPropietario" style="font-size: 30px"></a>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-md-4 col-form-label pl-0"
+                                       for=""><strong><span class="text-danger">*</span> Fecha</strong></label>
+{#                                {{ form.fecha }}#}
+                                <input type="date" name="fecha" class="form-control col-12 col-md-8" id="id_fecha">
+{#                                       data-toggle="tooltip" data-placement="right"#}
+                            </div>
+
+{#                            <div class="form-group row">#}
+{#                                <label class="col-sm-12 col-md-4 col-form-label pl-0"#}
+{#                                       for=""><strong><span class="text-danger">*</span> Hora</strong></label>#}
+{#                                {{ form.hora }}#}
+{#                                       data-toggle="tooltip" data-placement="right"#}
+{#                                <input type="time" class="form-control col-3 col-sm-3 col-md-3" name="hora" placeholder="03:00">#}
+{#                            </div>#}
+{##}
+{#                            <div class="form-group row">#}
+{#                                <label class="col-12 col-sm-4 col-form-label pl-0"#}
+{#                                       for=""><strong><span class="text-danger">*</span> Hrs. de Estadia</strong></label>#}
+{##}
+{#                                {{ form.tmp_estadia }}#}
+{#                                <input type="time" class="form-control col-3 col-sm-3 col-md-3" name="tmp_uso" placeholder="03:00">#}
+{#                            </div>#}
+
+                            <a href="#" class="btn btn-primary"
+                                   data-toggle="modal" data-target="#modalAreaComun">Agregar Area</a>
+
+                            <div class="row mt-1">
+                                <div class="table-responsive col-12">
+                                    <table id="tablaArea" class="table table-striped table-bordered table-hover">
+                                        <thead class="thead-dark">
+                                            <tr class="text-center">
+                                                <th nowrap="true" scope="col">Area Social</th>
+                                                <th nowrap="true" scope="col">Sector</th>
+                                                <th nowrap="true" scope="col">Horas Disponible</th>
+                                                <th nowrap="true" scope="col">Hora</th>
+                                                <th nowrap="true" scope="col">Tiempo Uso</th>
+                                                <th nowrap="true" scope="col">Accion</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="listAreas">
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+{#                            <div class="col-6 d-none invisible" id="select_select">#}
+{#                            </div>#}
+
+                            {#                                <select class="custom-select d-none hidden invisible" id="id_area_social" multiple="multiple" name="area_social">#}
+{#                                </select>#}
+
+                            <div class="row d-flex justify-content-end">
+                                <button class="btn btn-success btn-lg mr-2" onclick="">Registrar</button>
+                                <button onclick="window.history.back();" class="btn btn-danger btn-lg" type="button">Cancelar</button>
+                            </div>
+
+                            </form>
+                        </form>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+<div class="modal fade" id="modalPropietario" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Lista de Propietarios</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+{#          <form class="">#}
+              <div class="form-group row container">
+                  <select name="" id="selectPropietario" class="form-control col-4 p-0 mr-sm-1">
+                      <option value="ci">CI</option>
+                      <option value="nombre">Nombre</option>
+                      <option value="app">Apl. Paterno</option>
+                      <option value="apm">Apl. Materno</option>
+                  </select>
+
+                  <input class="form-control col-6 mr-sm-1" id="buscar" type="Buscar" placeholder="Buscar" aria-label="Search">
+                  <button class="btn btn-outline-success my-2 my-sm-0" onclick="inicio()">Buscar</button>
+{#                  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>#}
+              </div>
+{#          </form>#}
+          <div class="table-responsive">
+              <table class="table table-striped table-bordered table-hover">
+                  <thead class="thead-dark">
+                      <tr>
+                          <th>#</th>
+                          <th nowrap="true" class="text-center">Nombre</th>
+                          <th nowrap="true" class="text-center">Ci</th>
+                          <th nowrap="true" class="text-center">Nro. Casa</th>
+                          <th nowrap="true" class="text-center">Elegir</th>
+                      </tr>
+                  </thead>
+                  <tbody id="datos">
+
+                  </tbody>
+              </table>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+        <!-- Modal Area Comun-->
+<div class="modal fade" id="modalAreaComun" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Lista de Areas Comunes</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+{#          <form class="">#}
+              <div class="form-group row container">
+                  <select name="" id="selectArea" class="form-control col-4 p-0 mr-sm-1">
+                      <option value="sector">Sector</option>
+                      <option value="area_comun">Area Comun</option>
+                      <option value="estado">Estado</option>
+                  </select>
+
+                  <input class="form-control col-6 mr-sm-1" id="buscarArea" type="Buscar" placeholder="Buscar" aria-label="Search">
+                  <button class="btn btn-outline-success my-2 my-sm-0" onclick="BuscarArea()">Buscar</button>
+{#                  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>#}
+              </div>
+{#          </form>#}
+          <div class="table-responsive">
+              <table class="table table-striped table-bordered table-hover">
+                  <thead class="thead-dark">
+                      <tr>
+                          <th>#</th>
+                          <th nowrap="true" class="text-center">Area Social</th>
+                          <th nowrap="true" class="text-center">Sector</th>
+                          <th nowrap="true" class="text-center">Maximo Permitido</th>
+                          <th nowrap="true" class="text-center">Elegir</th>
+                      </tr>
+                  </thead>
+                  <tbody id="datosModal">
+
+                  </tbody>
+              </table>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}
+
+{% block extasjs %}
+    <script src="{% static 'js/validar-reserva.js' %}"></script>
+    <script src="{% static 'js/modal-propietario.js' %}"></script>
+    <script src="{% static 'js/modal-areaComun.js' %}"></script>
+    <script>
+        $(function () {
+          $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+{% endblock %}

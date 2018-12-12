@@ -1,0 +1,173 @@
+{% extends 'base/base.html' %}
+{% block title %}
+    REGISTRO DE VISITA
+{% endblock %}
+
+{% block style %}
+    {% load staticfiles %}
+{#    <link rel="stylesheet" href="../../static/css/formularios-style.css">#}
+    <link rel="stylesheet" href="{% static 'css/formularios-style.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container contenido-form">
+
+        <div class="row d-flex justify-content-center mt-4 mb-5 animated bounceInLeft" id="formulario">
+            <div class="col-12 col-sm-11 col-md-9 col-lg-7 col-xl-6">
+                <fieldset>
+                    <legend>Nuevo</legend>
+                        <h2 class="mb-4">Registro de Visita</h2>
+                        <form novalidate method="post" name="formulario_visita" onsubmit="return validar();">
+                            {% csrf_token %}
+
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-md-4 col-form-label pl-0"
+                                       for=""><strong><span class="text-danger">*</span> CI.</strong></label>
+                                {{ form.ci }}
+{#                                       data-toggle="tooltip" data-placement="right"#}
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-md-4 col-form-label pl-0"
+                                       for=""><strong><span class="text-danger">*</span> Nombres</strong></label>
+                                {{ form.nombre }}
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-md-4 col-form-label pl-0"
+                                       for=""><strong><span class="text-danger">*</span> Apl. Paterno</strong></label>
+                                {{ form.app }}
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-md-4 col-form-label pl-0"
+                                       for=""><strong><span class="text-danger">*</span> Apl. Materno</strong></label>
+                                {{ form.apm }}
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-md-4 col-form-label pl-0"
+                                       for=""><strong><span class="text-danger">*</span> Visita A:</strong></label>
+                                <input class="form-control col-11 col-md-7"
+                                       id="visitante"
+                                       type="text" readonly disabled
+                                       placeholder="Visita A">
+                                <input type="hidden" name="id_propietario" value="" id="pk-visitante">
+                                <a href="#" class="form-control btn btn-dark col-1 icon-search d-flex justify-content-center align-items-center"
+                                   data-toggle="modal" data-target="#myModal" style="font-size: 30px"></a>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-12 col-sm-4 col-form-label pl-0"
+                                       for=""><strong><span class="text-danger">*</span> Hrs. de Estadia</strong></label>
+
+{#                                {{ form.tmp_estadia }}#}
+                                <input type="time" class="form-control col-5 col-sm-5 col-md-5" name="tmp_estadia" placeholder="03:30">
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-12 col-sm-4 col-form-label pl-0"
+                                       for=""><strong><span class="text-danger">*</span> Entro en/a</strong></label>
+
+                                <div class="form-group contenedor-radio">
+                                    <input class="" id="auto"
+                                           type="radio" name="mod_ing" value="AUTO" checked>
+                                    <label class="label-radio"
+                                           for="auto">Automovil</label>
+
+                                    <input class="" id="pie"
+                                           type="radio" name="mod_ing" value="PIE">
+                                    <label class="label-radio"
+                                           for="pie">Pie</label>
+
+                                    <input class="" id="bici"
+                                           type="radio" name="mod_ing" value="BICI">
+                                    <label class="label-radio"
+                                           for="bici">Bicicleta</label>
+                                </div>
+                            </div>
+{##}
+{##}
+{#                            SE OCULTO ESTA PARTE#}
+{#                            <div class="form-group row d-none">#}
+{#                                <label class="col-sm-12 col-md-7 col-lg-7 col-form-label"#}
+{#                                       for="">Tiempo de Estadia</label>#}
+{#                                <input class="form-control col-sm-12 col-md-5 col-lg-5"#}
+{#                                       type="time"#}
+{#                                       data-toggle="tooltip" data-placement="top" data-html="true"#}
+{#                                       title="Tiempo que estuvo en el <b>Establecimiento</b>">#}
+{#                            </div>#}
+{#                            <div class="form-group row d-none">#}
+{#                                <label class="col-sm-12 col-md-7 col-lg-7 col-form-label"#}
+{#                                       for="">Fecha de Salida</label>#}
+{#                                <input class="form-control col-sm-12 col-md-5 col-lg-5"#}
+{#                                       type="date"#}
+{#                                       placeholder="dd/mm/aaaa"#}
+{#                                       data-toggle="tooltip" data-placement="top" data-html="true"#}
+{#                                       title="Fecha de salida del <b>Establecimiento</b>">#}
+{#                            </div>#}
+                            <div class="row d-flex justify-content-end">
+                                <button class="btn btn-success btn-lg mr-2" onclick="">Registrar</button>
+                                <button onclick="window.history.back();" class="btn btn-danger btn-lg" type="button">Cancelar</button>
+                            </div>
+                        </form>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Lista de Propietarios</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+{#          <form class="">#}
+              <div class="form-group row container">
+                  <select name="" id="selectPropietario" class="form-control col-4 p-0 mr-sm-1">
+                      <option value="ci">CI</option>
+                      <option value="nombre">Nombre</option>
+                      <option value="app">Apl. Paterno</option>
+                      <option value="apm">Apl. Materno</option>
+                  </select>
+
+                  <input class="form-control col-6 mr-sm-1" id="buscar" type="Buscar" placeholder="Buscar" aria-label="Search">
+                  <button class="btn btn-outline-success my-2 my-sm-0" onclick="inicio()">Buscar</button>
+{#                  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>#}
+              </div>
+{#          </form>#}
+          <div class="table-responsive">
+              <table class="table table-striped table-bordered table-hover">
+                  <thead class="thead-dark">
+                      <tr>
+                          <th>#</th>
+                          <th nowrap="true" class="text-center">Nombre</th>
+                          <th nowrap="true" class="text-center">Ci</th>
+                          <th nowrap="true" class="text-center">Nro. Casa</th>
+                          <th nowrap="true" class="text-center">Quien?</th>
+                      </tr>
+                  </thead>
+                  <tbody id="datos">
+
+                  </tbody>
+              </table>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block extasjs %}
+    <script src="{% static 'js/validar-visita.js' %}"></script>
+    <script src="{% static 'js/modal-propietario.js' %}"></script>
+    <script>
+        $(function () {
+          $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+{% endblock %}

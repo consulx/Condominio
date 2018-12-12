@@ -1,0 +1,61 @@
+{% extends 'base/base.html' %}
+
+{% block title %}
+    REGISTRO DE USUARIO
+{% endblock %}
+
+{% block style %}
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'css/formularios-style.css' %}">
+{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row d-flex justify-content-center mt-4 mb-5 animated bounceInLeft" id="formulario">
+                <div class="col-12 col-sm-11 col-md-9 col-lg-7 col-xl-6">
+                    <fieldset>
+                        <legend>Nuevo</legend>
+                            <h2 class="mb-4">Registro de Usuario</h2>
+                            <form method="post">
+                                {% csrf_token %}
+                                <!--{{ form.as_p }}-->
+
+                                <div class="row form-group">
+                                    <label class="col-sm-12 col-md-4 col-form-label pl-0" >Nombre</label>
+                                    <input type="text" class="col-12 col-md-8 form-control" name="first_name">
+                                </div>
+
+                                <div class="row form-group">
+                                    <label class="col-sm-12 col-md-4 col-form-label pl-0">Apellidos</label>
+                                    <input type="text" class="col-12 col-md-8 form-control" name="last_name">
+                                </div>
+
+                                <div class="row form-group">
+                                    <label class="col-sm-12 col-md-4 col-form-label pl-0">Nombre Usuario</label>
+                                    <input type="text" class="col-12 col-md-8 form-control" name="username">
+                                </div>
+                                <div class="row form-group">
+                                    <label class="col-sm-12 col-md-4 col-form-label pl-0">Correo</label>
+                                    <input type="email" class="col-12 col-md-8 form-control" name="email">
+                                </div>
+                                <div class="row form-group">
+                                    <label class="col-sm-12 col-md-4 col-form-label pl-0">Contraseña</label>
+                                    <input type="password" class="col-12 col-md-8 form-control" name="password1">
+                                </div>
+                                <div class="row form-group">
+                                    <label class="col-sm-12 col-md-4 col-form-label pl-0">Confirmar Contraseña</label>
+                                    <input type="password" class="col-12 col-md-8 form-control" name="password2">
+                                </div>
+
+                                <div class="row d-flex justify-content-end">
+                                    <button class="btn btn-success btn-lg mr-2" onclick="">Registrar</button>
+                                    <button onclick="window.history.back();" class="btn btn-danger btn-lg" type="button">Cancelar</button>
+                                </div>
+                            </form>
+                    </fieldset>
+                </div>
+        </div>
+    </div>
+
+{% endblock %}

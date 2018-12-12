@@ -1,0 +1,36 @@
+:root{
+    --Bg-base: #0c343d;
+    --Cl-title: #000;
+    --color-titulos: #fff;
+    --border-radius: 10px;
+    --border-radius-input: 5px;
+    --size-input: 1.1em;
+    --espacio-input: 5px;
+    --sombra: 0 0 6px 0px #000;
+
+    --color-succes: #28a745;
+    --color-error: #a7030b;
+}
+
+*{
+    padding: 0;
+    margin: 0;
+}
+
+*, *::before, ::after{
+    box-sizing: border-box;
+}
+
+body{
+    background: #ffffff;
+    /*background: #44a08d; !* fallback for old browsers *!*/
+    /*background: -webkit-linear-gradient(to bottom, #44a08d, #093637); !* Chrome 10-25, Safari 5.1-6 *!*/
+    /*background: -moz-linear-gradient(to bottom, #44a08d, #093637);*/
+    /*background: -ms-linear-gradient(to bottom, #44a08d, #093637);*/
+    /*background: -o-linear-gradient(to bottom, #44a08d, #093637);*/
+    /*background: linear-gradient(to bottom, #44a08d, #093637);*/
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}

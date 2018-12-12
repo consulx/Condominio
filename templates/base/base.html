@@ -1,0 +1,53 @@
+{% load staticfiles %}
+<!doctype html>
+<html lang="es">
+<head>
+    {% block extrastatic %}
+    {% endblock %}
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %} {% endblock %}</title>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/header.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    <link href = "https://file.myfontastic.com/kKsfS7sHHg4TXTfAwYFpWR/icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/alertify.core.css' %}">
+    <link rel="stylesheet" href="{% static 'css/alertify.default.css' %}">
+    <link rel="stylesheet" href="{% static 'css/overhang.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/root.css' %}">
+
+    {% block style %}
+    {% endblock %}
+    {% block javascript %}
+    {% endblock %}
+
+</head>
+<body>
+    {% block header %}
+        {% include 'base/header.html' %}
+    {% endblock %}
+
+    {% block content %}
+    {% endblock %}
+
+    {% block footer %}
+    {% endblock %}
+
+{#    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>#}
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script src="{% static 'js/jquery-ui.min.js' %}"></script>
+    <script src="{% static 'js/cdnjs.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+    <script src="{% static 'js/alertify.min.js' %}"></script>
+    <script src="{% static 'js/overhang.min.js' %}"></script>
+{#    <script src="{% static 'js/validar-visita.js' %}"></script>#}
+    {% block extasjs %}
+    {% endblock %}
+
+</body>
+</html>

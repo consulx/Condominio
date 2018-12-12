@@ -1,0 +1,24 @@
+
+nav{
+    background: var(--Bg-base);
+}
+
+.usuario-header{
+    text-decoration: none;
+    color: #fff;
+}
+
+.usuario-header:hover{
+    text-decoration: none;
+    color: #fff;
+    -webkit-transform: scale(1.3);
+    -moz-transform: scale(1.3);
+    -ms-transform: scale(1.3);
+    -o-transform: scale(1.3);
+    transform: scale(1.3);
+}
+
+.usuario-header > .icon-usuario{
+    font-size: 20px;
+}
+
